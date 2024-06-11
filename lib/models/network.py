@@ -5,9 +5,10 @@ class Network:
     all = {}
 
     def __init__(self, name, location, id="None"):
+        self.id = id
         self.name = name
         self.location = location
-        self._id = id
+       
 
     def __repr__(self):
         return f"<Network {self.id}: {self.name}, {self.location}>"

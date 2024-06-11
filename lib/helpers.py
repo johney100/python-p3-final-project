@@ -9,6 +9,10 @@ def seed_database():
     Show.create_table()
     Network.create_table()
 
+    abc = Network.create("ABC", "Los Angeles")
+    nbc = Network.create("NBC", "New York")
+    hbo = Network.create("HBO", "Los Angeles")
+
 seed_database()
 print("Seeded database")
 

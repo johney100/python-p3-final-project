@@ -8,7 +8,8 @@ from models.network import Network
 class Show:
     all = {}
 
-    def __init__(self, name, genre, network_id):
+    def __init__(self, name, genre, network_id, id=None):
+        self._id = id
         self.name = name
         self.genre = genre
         self.network_id = network_id
@@ -25,8 +26,9 @@ class Show:
             id INTEGER PRIMARY KEY,
             name TEXT,
             genre TEXT,     
-            network_id INT
-            )
+            network_id INTEGER,
+            FOREIGN KEY (network_id) REFERENCES networks (id))
+            
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -136,7 +138,7 @@ class Show:
     def network_id(self):
         return self._network_id
 
-    @network_id.setter
+   
     def network_id(self, network_id):
         if type(network_id) is int and Network.find_by_id(network_id):
             self._network_id = network_id
