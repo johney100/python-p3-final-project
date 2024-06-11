@@ -15,7 +15,6 @@ class Network:
 
     @classmethod
     def create_table(cls):
-        """ Create a new table to persist the attributes of Network instances """
         sql = """
             CREATE TABLE IF NOT EXISTS networks (
             id INTEGER PRIMARY KEY,
@@ -71,14 +70,11 @@ class Network:
     def instance_from_db(cls, row):
         """Return a Network object having the attribute values from the table row."""
 
-        # Check the dictionary for an existing instance using the row's primary key
         network = cls.all.get(row[0])
         if network:
-            # ensure attributes match row values in case local instance was modified
             network.name = row[1]
             network.location = row[2]
         else:
-            # not in dictionary, create new instance and add to dictionary
             network = cls(row[1], row[2])
             network.id = row[0]
             cls.all[network.id] = network
@@ -86,7 +82,7 @@ class Network:
     
     @classmethod
     def find_by_id(cls, id):
-        """Return a Networkls object corresponding to the table row matching the specified primary key"""
+        """Return a Network object corresponding to the table row matching the specified primary key"""
         sql = """
             SELECT *
             FROM networks
@@ -108,7 +104,6 @@ class Network:
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
-        # Delete the dictionary entry using id as the key
         del type(self).all[self.id]
 
         # Set the id to None

@@ -20,14 +20,13 @@ class Show:
 
     @classmethod
     def create_table(cls):
-        """ Create a new table to persist the attributes of Show instances """
         sql = """
             CREATE TABLE IF NOT EXISTS shows (
             id INTEGER PRIMARY KEY,
             name TEXT,
             genre TEXT,     
-            network_id INTEGER,
-            FOREIGN KEY (network_id) REFERENCES networks (id))
+            network_id INTEGER)
+      
             
         """
         CURSOR.execute(sql)
@@ -47,10 +46,10 @@ class Show:
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
         sql = """
-                INSERT INTO shows (name, genre)
-                VALUES (?, ?)
+                INSERT INTO shows (name, genre, network_id)
+                VALUES (?, ?, ?)
         """
-        CURSOR.execute(sql, (self.name, self.genre))
+        CURSOR.execute(sql, (self.name, self.genre, self.network_id))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
@@ -134,11 +133,11 @@ class Show:
         # Set the id to None
         self.id = None
     
-    @property
+    @classmethod
     def network_id(self):
         return self._network_id
 
-   
+    @classmethod
     def network_id(self, network_id):
         if type(network_id) is int and Network.find_by_id(network_id):
             self._network_id = network_id

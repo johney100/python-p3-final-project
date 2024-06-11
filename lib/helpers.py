@@ -13,6 +13,8 @@ def seed_database():
     nbc = Network.create("NBC", "New York")
     hbo = Network.create("HBO", "Los Angeles")
 
+    Show.create("Modern Family", "Comedy", 2)
+
 seed_database()
 print("Seeded database")
 
