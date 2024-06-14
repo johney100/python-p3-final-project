@@ -108,3 +108,5 @@ class Network:
 
         # Set the id to None
         self.id = None
+
+        # add instance method called Shows to call this given networks shows

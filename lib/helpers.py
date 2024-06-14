@@ -3,20 +3,8 @@ from models.__init__ import CURSOR, CONN
 from models.show import Show
 from models.network import Network
 
-def seed_database():
-    Show.drop_table()
-    Network.drop_table()
-    Show.create_table()
-    Network.create_table()
+#helpersd should return = pass objects to each other
 
-    abc = Network.create("ABC", "Los Angeles")
-    nbc = Network.create("NBC", "New York")
-    hbo = Network.create("HBO", "Los Angeles")
-
-    Show.create("Modern Family", "Comedy", 2)
-
-seed_database()
-print("Seeded database")
 
 def exit_program():
     print("Goodbye!")

@@ -84,9 +84,10 @@ class Show:
             # ensure attributes match row values in case local instance was modified
             show.name = row[1]
             show.genre = row[2]
+            show.network_id =row[3]
         else:
             # not in dictionary, create new instance and add to dictionary
-            show = cls(row[1], row[2])
+            show = cls(row[1], row[2], row[3])
             show.id = row[0]
             cls.all[show.id] = show
         return show
