@@ -25,7 +25,7 @@ class Show:
             id INTEGER PRIMARY KEY,
             name TEXT,
             genre TEXT,     
-            network_id INTEGER)
+            network_id INTEGER REFERENCES networks(id))
       
             
         """
@@ -87,7 +87,7 @@ class Show:
             show.network_id =row[3]
         else:
             # not in dictionary, create new instance and add to dictionary
-            show = cls(row[1], row[2], row[3])
+            show = cls(row[1], row[2], row)
             show.id = row[0]
             cls.all[show.id] = show
         return show

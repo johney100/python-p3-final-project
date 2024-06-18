@@ -108,5 +108,15 @@ class Network:
 
         # Set the id to None
         self.id = None
+    
+    def shows(self):
+        from models.show import Show
+        sql = """
+        SELECT * FROM shows
+        WHERE network_id = ?
+    """
+        CURSOR.execute(sql, (self.id,))
+        rows = CURSOR.fetchall()  # Fetch all rows from the query
+        return [Show.instance_from_db(row) for row in rows]
 
         # add instance method called Shows to call this given networks shows
