@@ -14,9 +14,7 @@ class Show:
         self.genre = genre
         self.network_id = network_id
       
-            
-    def __repr__(self):
-        return f"<Show {self.id}: {self.name}, {self.genre}, {self.network_id}>"
+    
 
     @classmethod
     def create_table(cls):

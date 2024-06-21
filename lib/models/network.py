@@ -10,8 +10,6 @@ class Network:
         self.location = location
        
 
-    def __repr__(self):
-        return f"<Network {self.id}: {self.name}, {self.location}>"
 
     @classmethod
     def create_table(cls):
@@ -91,8 +89,20 @@ class Network:
 
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        """Return a Network object corresponding to the table row matching the specified name"""
+        sql = """
+            SELECT *
+            FROM networks
+            WHERE name = ?
+        """
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None
    
-    def delete(self):
+    def delete_network(self):
         """Delete the table row corresponding to the current Network instance,
         delete the dictionary entry, and reassign id attribute"""
 
