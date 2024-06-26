@@ -2,6 +2,7 @@
 from models.__init__ import CURSOR, CONN
 from models.show import Show
 from models.network import Network
+#maybe import from cli.py to get updated network?
 
 #helpersd should return = pass objects to each other
 
@@ -72,8 +73,8 @@ def list_networks():
     networks = Network.get_all()
     print("\n   Networks \n ") 
     print("***************\n ")
-    for i, network in enumerate(networks):
-        print(f"{i+1}.{network.name} ") 
+    for i, network in enumerate(networks, start=1):
+        print(f"{i}.{network.name} ") 
     print("\n***************\n ")
     return networks
 
@@ -94,8 +95,8 @@ def network_details(network_index):
     if shows:
       print("\nShows")
       print("***************")
-      for i, show in enumerate(shows):
-            print(f"{i+1}.{show.name} ({show.genre})\n ")  
+      for i, show in enumerate(shows, start=1):
+            print(f"{i}.{show.name} ({show.genre})\n ")  
       print("\n***************\n ")
     else:
       print(f"  No shows found on {network.name}.")
@@ -133,7 +134,7 @@ def network_details(network_index):
 
   else:
     print(f"Network with ID {network_index} not found.")
-  
+
 
 def delete_network():
     

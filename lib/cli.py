@@ -42,12 +42,13 @@ def main_menu():
     print("\n------------- ")
     print("TELEVISION SHOW APP")
     print("-------------\n ")
-    print("Type 0 to exit the program")
+    print("Type E to exit the program")
     print("Select the number of the network to see its shows:")
     print(" Enter network name to delete network")
+    
     list_networks()
     choice = input("> ")
-    if choice == "0":
+    if choice in ("E", "e"):
         exit_program()
     else:
         try:

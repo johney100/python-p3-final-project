@@ -4,7 +4,7 @@ from models.__init__ import CURSOR, CONN
 class Network:
     all = {}
 
-    def __init__(self, name, location, id="None"):
+    def __init__(self, name, location):
         self.id = id
         self.name = name
         self.location = location
@@ -102,7 +102,7 @@ class Network:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
    
-    def delete_network(self):
+    def delete_network(self, ):
         """Delete the table row corresponding to the current Network instance,
         delete the dictionary entry, and reassign id attribute"""
 
