@@ -54,13 +54,19 @@ def delete_show(network, show_index):
 def create_network():
     name = input("Enter the network name: ")
     location = input("Enter the network location: ")
-    
-    
+
     try:
         network = Network.create(name, location)
-        print(f'Success: {network}')
+        print(f"Network created: {network.name}")
     except Exception as exc:
         print("Error creating network: ", exc)
+    else:  # Code to run if there were no exceptions (success)  
+        print(f" Enter 'B' to go back to Main Menu or 'A' to add first show to {network.name}")
+        menu_choice = input("> ")
+        if menu_choice in ("B", "b"):
+            return  # Exit to main menu
+        else:
+            create_show(network.id)
 
 
 def list_networks():
