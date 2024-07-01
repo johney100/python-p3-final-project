@@ -85,9 +85,11 @@ def find_network_by_id():
         f'Network id not found')
 
     
-def network_details(network_index):
+def network_details(network):
   """Displays details of a specific network and their shows (if any)"""
-  network = Network.find_by_id(network_index)
+ # if not networks:
+ #       networks = Network.get_all()  # Get initial list if not provided
+ # network = Network.find_by_id(network_index)
   network_deleted = False
   if network:
     print(f"\nNetwork: {network.name}")
@@ -111,10 +113,14 @@ def network_details(network_index):
       if sub_choice in ("A", "a"):
         create_show(network.id)
         # Code to add a show (call a separate function or implement logic here)
-        break  # Exit sub-menu after adding a show
+        break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
       elif sub_choice in ("B", "b"):
         break  # Exit sub-menu loop (back to main menu)
-      elif sub_choice in ("D", "d"):
+      elif sub_choice in ("D", "d"):                
+        #networks = [n for n in networks if n.id != network.id]  # Update the networks list 
+        #loop through network shows and delete them first - otherwise the shows get stranded with no network - for show in network.shows
+        for show in network.shows():
+           show.delete()
         network.delete_network()
         network_deleted = True
         print("\n***************\n ")
@@ -136,11 +142,3 @@ def network_details(network_index):
     print(f"Network with ID {network_index} not found.")
 
 
-def delete_network():
-    
-    id_ = input("Enter the network id: ")
-    if network := Network.find_by_id(id_):
-        network.delete()
-        print(f'Show {id_} deleted')
-    else:
-        print(f'Show {id_} not found')

@@ -13,7 +13,6 @@ from helpers import (
     delete_show,
     create_network,
     list_networks,
-    delete_network,
     network_details
 )
 
@@ -45,18 +44,25 @@ def main_menu():
     print("Type E to exit the program")
     print("Select the number of the network to see its shows:")
     print(" Enter network name to delete network")
+    print(" Enter C to create network")
     
-    list_networks()
+    networks = list_networks()
     choice = input("> ")
     if choice in ("E", "e"):
         exit_program()
+    elif choice in ("C", "c"):
+        create_network()
     else:
         try:
             # Get network index (assuming numeric input)
             network_index = int(choice)
-            network_details(network_index)
+            network = networks[network_index-1]
+            network_details(network)
+            #shows_loop(network) - define outside main_menu in the CLI
+
+            #network_details(network_index)
         except ValueError:
-            print("Invalid choice. Please enter a number or 0 to exit.")
+            print("Invalid choice. Please enter a number or E to exit.")
 
 """ this code is needed to grab the 
 
