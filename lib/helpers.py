@@ -38,12 +38,6 @@ def create_show(sub_choice):
     except Exception as exc:
         print("Error creating show: ", exc)
 
-def find_show_by_name():
-    name = input("Enter the show's name: ")
-    show = Show.find_by_name(name)
-    print(show) if show else print(
-        f'Show {name} not found')
-
     
 def delete_show(network, show_index):
     shows = network.shows()  # Assuming network has a shows() method
@@ -87,21 +81,14 @@ def find_network_by_id():
     
 def network_details(network):
   """Displays details of a specific network and their shows (if any)"""
- # if not networks:
- #       networks = Network.get_all()  # Get initial list if not provided
- # network = Network.find_by_id(network_index)
-  network_deleted = False
   if network:
-    print(f"\nNetwork: {network.name}")
-    shows = network.shows()  
-    if shows:
-      print("\nShows")
-      print("***************")
-      for i, show in enumerate(shows, start=1):
-            print(f"{i}.{show.name} ({show.genre})\n ")  
-      print("\n***************\n ")
-    else:
-      print(f"  No shows found on {network.name}.")
+    print(f"\nNetwork: {network.name}") 
+  else:
+    print(f"Network with ID {network} not found.") 
+
+def network_loop(network):
+    network_deleted = False
+    shows = network.shows() 
     while True:
       print("\n  Options:")      
       print(" Enter 'B' to go back to Main Menu")
@@ -138,7 +125,6 @@ def network_details(network):
       else:
         print("Invalid choice. Please enter 1 or 2.")
 
-  else:
-    print(f"Network with ID {network_index} not found.")
+  
 
 
