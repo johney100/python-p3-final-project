@@ -100,9 +100,10 @@ def network_loop(network):
       if sub_choice in ("A", "a"):
         create_show(network.id)
         # Code to add a show (call a separate function or implement logic here)
-        break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
+        #break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
       elif sub_choice in ("B", "b"):
-        break  # Exit sub-menu loop (back to main menu)
+        #break  # Exit sub-menu loop (back to main menu)
+         return
       elif sub_choice in ("D", "d"):                
         #networks = [n for n in networks if n.id != network.id]  # Update the networks list 
         #loop through network shows and delete them first - otherwise the shows get stranded with no network - for show in network.shows

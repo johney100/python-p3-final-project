@@ -37,17 +37,19 @@ def main_menu():
     else:
         try:
             # Get network index (assuming numeric input)
-            network_index = int(choice)
-            network = networks[network_index-1]
-            network_details(network)
-           
-            shows_loop(network)
-            network_loop(network)
             
-            #network_details(network_index)
-        except ValueError:
-            print("Invalid choice. Please enter a number or E to exit.")
+            network_index = int(choice)
+            if 0 <= network_index - 1 < len(networks):
+                network = networks[network_index - 1]
+                network_details(network)
+                shows_loop(network)
+                network_loop(network)
+            else:
+                print(f"There is no network with the number [{choice}] on this list. Please try again.")
 
+        except ValueError:
+            print("Invalid choice. Please enter a network number or E to exit.")
+         
         
 def shows_loop(network): 
     shows = network.shows() 
