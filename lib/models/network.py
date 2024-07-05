@@ -10,7 +10,6 @@ class Network:
         self.location = location
        
 
-
     @classmethod
     def create_table(cls):
         sql = """
@@ -102,7 +101,7 @@ class Network:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
    
-    def delete_network(self, ):
+    def delete_network(self):
         """Delete the table row corresponding to the current Network instance,
         delete the dictionary entry, and reassign id attribute"""
 
@@ -130,3 +129,14 @@ class Network:
         return [Show.instance_from_db(row) for row in rows]
 
         # add instance method called Shows to call this given networks shows
+    
+    @property
+    def delete_by_name(self):
+        """Deletes the network if its name matches the property setter's argument."""
+        def setter(name):
+            if self.name == name:
+                self.delete_network()
+                print(f"Network '{name}' deleted successfully.")
+            else:
+                print(f"Network '{name}' not found. Please try again.")
+        return setter

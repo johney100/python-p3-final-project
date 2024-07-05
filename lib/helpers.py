@@ -60,7 +60,7 @@ def create_network():
         print(f"Network created: {network.name}")
     except Exception as exc:
         print("Error creating network: ", exc)
-    else:  # Code to run if there were no exceptions (success)  
+    else:   
         print(f" Enter 'B' to go back to Main Menu or 'A' to add first show to {network.name}")
         menu_choice = input("> ")
         if menu_choice in ("B", "b"):

@@ -11,6 +11,7 @@ from helpers import (
     list_networks,
     network_details,
     network_loop
+
 )
 
 
@@ -34,7 +35,7 @@ def main_menu():
         exit_program()
     elif choice in ("C", "c"):
         create_network()
-    else:
+    elif choice.isdigit():
         try:
             # Get network index (assuming numeric input)
             
@@ -49,8 +50,20 @@ def main_menu():
 
         except ValueError:
             print("Invalid choice. Please enter a network number or E to exit.")
-         
+    else: 
         
+        network_to_delete = choice.upper()
+        # Find network by name and delete if found
+        network = Network.find_by_name(network_to_delete)
+        if network:
+            for show in network.shows():
+                show.delete()
+            network.delete_network()
+            print(f"Network '{network_to_delete}' deleted successfully.")
+        else:
+            print(f"Network '{network_to_delete}' not found. Please try again.")
+
+
 def shows_loop(network): 
     shows = network.shows() 
     if shows:
