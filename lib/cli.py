@@ -10,7 +10,8 @@ from helpers import (
     create_network,
     list_networks,
     network_details,
-    network_loop
+    network_loop,
+    list_shows
 
 )
 
@@ -28,8 +29,11 @@ def main_menu():
     print("Select the number of the network to see its shows:")
     print(" Enter network name to delete network")
     print(" Enter C to create network")
+    print(" Enter any show name to check it's details")
     
     networks = list_networks()
+    shows = list_shows()
+   
     choice = input("> ")
     if choice in ("E", "e"):
         exit_program()
@@ -50,6 +54,8 @@ def main_menu():
 
         except ValueError:
             print("Invalid choice. Please enter a network number or E to exit.")
+    elif any(show.name == choice for show in shows):
+        find_show_by_name(choice)
     else: 
         
         network_to_delete = choice.upper()
@@ -61,7 +67,7 @@ def main_menu():
             network.delete_network()
             print(f"Network '{network_to_delete}' deleted successfully.")
         else:
-            print(f"Network '{network_to_delete}' not found. Please try again.")
+            print(f"'{network_to_delete}' not found. Please try again.")
 
 
 def shows_loop(network): 
@@ -74,6 +80,13 @@ def shows_loop(network):
       print("\n***************\n ")
     else:
       print(f"  No shows found on {network.name}.")
+
+def find_show_by_name(choice):
+    show = Show.find_by_name(choice)
+    network = Network.find_by_id(show.network_id)
+
+       
+    print(f"Show Name: {show.name} | Genre: {show.genre} | Network: {network.name} ")
 
 if __name__ == "__main__":
     main()

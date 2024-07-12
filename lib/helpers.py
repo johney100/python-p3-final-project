@@ -19,13 +19,7 @@ def exit_program():
     
 def list_shows():
     shows = Show.get_all()
-    if shows:
-        print("List of Shows:\n")
-        print("***************\n ")
-    for show in shows:
-        print(f" -{show.name}") 
-        print("\n ")
-    print("***************\n ")
+    return shows
 
 
 def create_show(sub_choice):
@@ -135,3 +129,4 @@ def network_loop(network):
   
 
 
+   
