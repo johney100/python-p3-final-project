@@ -132,7 +132,7 @@ class Show:
         # Set the id to None
         self.id = None
     
-    @classmethod
+    @property
     def network_id(self):
         return self._network_id
 
@@ -143,3 +143,5 @@ class Show:
         else:
             raise ValueError(
                 "network_id must reference a network in the database")
+  
+   

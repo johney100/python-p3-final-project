@@ -30,7 +30,7 @@ def create_show(sub_choice):
         show = Show.create(name, genre, network_id)
         print(f'Success: {show.name} was added to the network')
     except Exception as exc:
-        print("Error creating show: ", exc)
+        print("Error creating show: ", exc) 
 
     
 def delete_show(network, show_index):
