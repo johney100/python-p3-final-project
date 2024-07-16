@@ -2,9 +2,7 @@
 from models.__init__ import CURSOR, CONN
 from models.show import Show
 from models.network import Network
-#maybe import from cli.py to get updated network?
 
-#helpersd should return = pass objects to each other
 
 
 
@@ -12,10 +10,7 @@ def exit_program():
     print("Goodbye!")
     exit()
 
-#def list_shows():
-#    shows = Show.get_all()
-#    for show in shows:
-#        print(show)
+
     
 def list_shows():
     shows = Show.get_all()
@@ -72,13 +67,8 @@ def list_networks():
     print("\n***************\n ")
     return networks
 
-def find_network_by_id():
-    name = input("Enter the show's name: ")
-    network = Network.find_by_id(id)
-    print(network.name) if network else print(
-        f'Network id not found')
 
-    
+
 def network_details(network):
   """Displays details of a specific network and their shows (if any)"""
   if network:
@@ -98,7 +88,7 @@ def network_loop(network):
         print(" Enter show number to delete show")
       sub_choice = input("Enter your choice: ")
       if sub_choice in ("A", "a"):
-        create_show(network.id)
+        create_show(network.id) 
         # Code to add a show (call a separate function or implement logic here)
         #break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
       elif sub_choice in ("B", "b"):

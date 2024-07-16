@@ -16,6 +16,7 @@ def seed_database():
     Show.create("Modern Family", "Comedy", 2)
     Show.create("Friends", "Comedy", 2)
     Show.create("The Sopranos", "Drama", 1)
+    
 
 seed_database()
 print("Seeded database")

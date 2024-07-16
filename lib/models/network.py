@@ -5,10 +5,29 @@ class Network:
     all = {}
 
     def __init__(self, name, location):
-        self.id = id
+      
         self.name = name
-        self.location = location
+        self._location = location
        
+       #add setters and getters
+    
+    @property
+    def name(self):
+        """Returns the name of the network."""
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+          self._name = name
+
+    @property
+    def location(self):
+        
+        return self._location
+    
+    @location.setter
+    def location(self, location):
+          self._location = location
 
     @classmethod
     def create_table(cls):

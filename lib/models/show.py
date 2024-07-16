@@ -9,12 +9,43 @@ class Show:
     all = {}
 
     def __init__(self, name, genre, network_id, id=None):
-        self._id = id
-        self.name = name
-        self.genre = genre
+     
+        self._name = name
+        self._genre = genre
         self.network_id = network_id
-      
+      #add setters and getters for all attributes as property methods in both shows and networks
     
+   
+    @property
+    def name(self):
+        """Returns the name of the show."""
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+          self._name = name
+    
+    @property
+    def genre(self):
+        """Returns the name of the show."""
+        return self._genre
+    
+    @genre.setter
+    def genre(self, genre):
+          self._genre = genre
+     
+
+    @property
+    def network_id(self):
+        return self._network_id
+    
+    @network_id.setter 
+    def network_id(self, network_id):
+        if type(network_id) is int and Network.find_by_id(network_id):
+            self.network_id = network_id
+        else:
+            raise ValueError(
+                "network_id must reference a network in the database")
 
     @classmethod
     def create_table(cls):
@@ -56,7 +87,7 @@ class Show:
     @classmethod
     def create(cls, name, genre, network_id):
         """ Initialize a new Show instance and save the object to the database """
-        show = cls(name, genre, network_id)
+        show = cls(name, genre, network_id) #missing validation - setter + getters
         show.save()
         return show
     
@@ -85,10 +116,11 @@ class Show:
             show.network_id =row[3]
         else:
             # not in dictionary, create new instance and add to dictionary
-            show = cls(row[1], row[2], row)
+            show = cls(row[1], row[2], row[3])
             show.id = row[0]
             cls.all[show.id] = show
         return show
+    
     
     @classmethod
     def find_by_name(cls, name):
@@ -132,11 +164,9 @@ class Show:
         # Set the id to None
         self.id = None
     
-    @property
-    def network_id(self):
-        return self._network_id
+   
 
-    @classmethod
+    @classmethod #upfate this to a setter
     def network_id(self, network_id):
         if type(network_id) is int and Network.find_by_id(network_id):
             self._network_id = network_id
