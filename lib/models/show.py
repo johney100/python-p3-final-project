@@ -23,7 +23,10 @@ class Show:
     
     @name.setter
     def name(self, name):
-          self._name = name
+    #  if not name or not isinstance(name, str):
+    #    raise ValueError("Name must be a non-empty string")
+    #  else:
+        self._name = name
     
     @property
     def genre(self):

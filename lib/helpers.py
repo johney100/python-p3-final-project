@@ -17,10 +17,10 @@ def list_shows():
     return shows
 
 
-def create_show(sub_choice):
+def create_show(network):
     name = input("Enter the show name: ")
     genre = input("Enter the show genre: ")
-    network_id = sub_choice
+    network_id = network
     try:
         show = Show.create(name, genre, network_id)
         print(f'Success: {show.name} was added to the network')
