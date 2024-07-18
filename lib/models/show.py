@@ -12,7 +12,7 @@ class Show:
      
         self._name = name
         self._genre = genre
-        self.network_id = network_id
+        self._network_id = network_id
       #add setters and getters for all attributes as property methods in both shows and networks
     
    
@@ -23,9 +23,9 @@ class Show:
     
     @name.setter
     def name(self, name):
-    #  if not name or not isinstance(name, str):
-    #    raise ValueError("Name must be a non-empty string")
-    #  else:
+      if len(name) >= 20:
+        raise ValueError("Name must 20 characters or less")
+      else:
         self._name = name
     
     @property
@@ -35,6 +35,9 @@ class Show:
     
     @genre.setter
     def genre(self, genre):
+       if len(genre) >= 20:
+        raise ValueError("Genre must 20 characters or less")
+       else:
           self._genre = genre
      
 
@@ -45,7 +48,7 @@ class Show:
     @network_id.setter 
     def network_id(self, network_id):
         if type(network_id) is int and Network.find_by_id(network_id):
-            self.network_id = network_id
+            self._network_id = network_id
         else:
             raise ValueError(
                 "network_id must reference a network in the database")
@@ -90,7 +93,16 @@ class Show:
     @classmethod
     def create(cls, name, genre, network_id):
         """ Initialize a new Show instance and save the object to the database """
-        show = cls(name, genre, network_id) #missing validation - setter + getters
+        show = cls(name, genre, network_id)
+        show.name = name  # Calls the name setter for validation
+
+        # Validate genre attribute using the setter
+        show.genre = genre  # Calls the genre setter for validation
+
+        # Validate network_id attribute using the setter
+        show.network_id = network_id  # Calls the network_id setter for validation
+    
+          # Now create the Show instance after validation
         show.save()
         return show
     
