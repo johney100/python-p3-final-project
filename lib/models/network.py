@@ -7,7 +7,7 @@ class Network:
     def __init__(self, name, location):
       
         self.name = name
-        self._location = location
+        self.location = location
        
        #add setters and getters
     
@@ -18,6 +18,9 @@ class Network:
     
     @name.setter
     def name(self, name):
+      if len(name) >= 20:
+        raise ValueError("Name must 20 characters or less")
+      else:
           self._name = name
 
     @property
@@ -27,6 +30,9 @@ class Network:
     
     @location.setter
     def location(self, location):
+      if len(location) >= 20:
+        raise ValueError("Location must 20 characters or less")
+      else:
           self._location = location
 
     @classmethod
@@ -67,6 +73,8 @@ class Network:
     def create(cls, name, location):
         """ Initialize a new Network instance and save the object to the database """
         network = cls(name, location)
+        network.name = name
+        network.location = location
         network.save()
         return network
     
