@@ -8,11 +8,11 @@ from models.network import Network
 class Show:
     all = {}
 
-    def __init__(self, name, genre, network_id, id=None):
+    def __init__(self, name, genre, network_id, ):
      
-        self._name = name
-        self._genre = genre
-        self._network_id = network_id
+        self.name = name
+        self.genre = genre
+        self.network_id = network_id
       #add setters and getters for all attributes as property methods in both shows and networks
     
    
