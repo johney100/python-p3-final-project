@@ -9,7 +9,6 @@ class Network:
         self.name = name
         self.location = location
        
-       #add setters and getters
     
     @property
     def name(self):
