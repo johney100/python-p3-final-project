@@ -57,7 +57,6 @@ def main_menu():
     elif any(show.name == choice for show in shows):
         find_show_by_name(choice)
     else: 
-        
         network_to_delete = choice.upper()
         # Find network by name and delete if found
         network = Network.find_by_name(network_to_delete)

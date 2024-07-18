@@ -6,6 +6,8 @@ from models.network import Network
 
 
 
+
+
 def exit_program():
     print("Goodbye!")
     exit()
@@ -15,6 +17,16 @@ def exit_program():
 def list_shows():
     shows = Show.get_all()
     return shows
+
+def print_shows(show_list):
+    shows = show_list
+    print("\n   Shows \n ") 
+    print("***************\n ")
+    for i, show in enumerate(shows, start=1):
+        print(f"{i}.{show.name} ") 
+    print("\n***************\n ")
+   
+    
 
 
 def create_show(network):
@@ -68,7 +80,6 @@ def list_networks():
     return networks
 
 
-
 def network_details(network):
   """Displays details of a specific network and their shows (if any)"""
   if network:
@@ -89,6 +100,7 @@ def network_loop(network):
       sub_choice = input("Enter your choice: ")
       if sub_choice in ("A", "a"):
         create_show(network.id) 
+        print_shows(shows)
         # Code to add a show (call a separate function or implement logic here)
         #break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
       elif sub_choice in ("B", "b"):
@@ -103,7 +115,7 @@ def network_loop(network):
         network_deleted = True
         print("\n***************\n ")
         print(f"{network.name} network was successfully deleted")
-        print("\n***************\n ")
+        list_networks()
       elif sub_choice not in ("A", "a", "B", "b", "D", "d"):
         try:
             show_index = int(sub_choice) - 1  # Adjust for 0-based indexing
