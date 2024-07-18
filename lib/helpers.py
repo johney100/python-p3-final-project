@@ -6,6 +6,18 @@ from models.network import Network
 
 
 
+def shows_loop(network): 
+    shows = network.shows() 
+    if shows:
+      print("\nShows")
+      print("***************")
+      for i, show in enumerate(shows, start=1):
+            print(f"{i}.{show.name} ({show.genre})\n ")  
+      print("\n***************\n ")
+    else:
+      print(f"  No shows found on {network.name}.")
+    return shows
+
 
 
 def exit_program():
@@ -17,15 +29,6 @@ def exit_program():
 def list_shows():
     shows = Show.get_all()
     return shows
-
-def print_shows(show_list):
-    shows = show_list
-    print("\n   Shows \n ") 
-    print("***************\n ")
-    for i, show in enumerate(shows, start=1):
-        print(f"{i}.{show.name} ") 
-    print("\n***************\n ")
-   
     
 
 
@@ -59,6 +62,7 @@ def create_network():
     try:
         network = Network.create(name, location)
         print(f"Network created: {network.name}")
+        list_networks()
     except Exception as exc:
         print("Error creating network: ", exc)
     else:   
@@ -68,6 +72,7 @@ def create_network():
             return  # Exit to main menu
         else:
             create_show(network.id)
+            shows_loop(network)
 
 
 def list_networks():
@@ -100,7 +105,7 @@ def network_loop(network):
       sub_choice = input("Enter your choice: ")
       if sub_choice in ("A", "a"):
         create_show(network.id) 
-        print_shows(shows)
+        shows_loop(network)
         # Code to add a show (call a separate function or implement logic here)
         #break  # Exit sub-menu after adding a show - CHANGE THIS TO CALL main_menu
       elif sub_choice in ("B", "b"):

@@ -11,7 +11,8 @@ from helpers import (
     list_networks,
     network_details,
     network_loop,
-    list_shows
+    list_shows,
+    shows_loop
 
 )
 
@@ -69,16 +70,6 @@ def main_menu():
             print(f"'{network_to_delete}' not found. Please try again.")
 
 
-def shows_loop(network): 
-    shows = network.shows() 
-    if shows:
-      print("\nShows")
-      print("***************")
-      for i, show in enumerate(shows, start=1):
-            print(f"{i}.{show.name} ({show.genre})\n ")  
-      print("\n***************\n ")
-    else:
-      print(f"  No shows found on {network.name}.")
 
 def find_show_by_name(choice):
     show = Show.find_by_name(choice)
